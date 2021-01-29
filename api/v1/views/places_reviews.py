@@ -65,8 +65,13 @@ def post_review(place_id):
         abort(400, 'Not a JSON')
     elif 'user_id' not in payload:
         abort(400, 'Missing user_id')
+<<<<<<< HEAD:api/v1/views/reviews.py
+    elif 'user.user_id' not in payload:
+        abort(404)
+=======
     elif 'text' not in payload:
         abort(400, 'Missing text')
+>>>>>>> 03ee046fc51fc84f789bc97c4c1833891a2c707e:api/v1/views/places_reviews.py
 
     for place in places.values():
         if place.id == place_id:
