@@ -76,9 +76,11 @@ def post_review(place_id):
     for place in places.values():
         if place.id == place_id:
             payload["place_id"] = place_id
-            new_review = Review(**payload)
-            new_review.save()
-            return(jsonify(new_review.to_dict()), 201)
+            valid_user = storage.get(User, payload['user_id'])
+            if valid_user is not None:
+                new_review = Review(**payload)
+                new_review.save()
+                return(jsonify(new_review.to_dict()), 201)
     abort(404)
     return
 
